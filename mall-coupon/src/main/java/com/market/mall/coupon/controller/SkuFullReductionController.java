@@ -3,6 +3,7 @@ package com.market.mall.coupon.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+
 import com.market.common.to.SkuReductionTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class SkuFullReductionController {
     private SkuFullReductionService skuFullReductionService;
 
     @PostMapping("/saveinfo")
-    public R saveInfo(@RequestParam SkuReductionTo skuReductionTo){
+    public R saveInfo(@RequestBody SkuReductionTo skuReductionTo){
         skuFullReductionService.saveSkuReduction(skuReductionTo);
         return R.ok();
     }
