@@ -11,6 +11,7 @@
 
     <artifactId>mall-common</artifactId>
     <dependencies>
+
         <!-- mybatisPLUS-->
         <dependency>
             <groupId>com.baomidou</groupId>

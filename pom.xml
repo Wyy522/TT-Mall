@@ -19,5 +19,6 @@
         <module>mall-common</module>
         <module>mall-gateways</module>
         <module>mall-search</module>
+        <module>mall-third-party</module>
     </modules>
 </project>

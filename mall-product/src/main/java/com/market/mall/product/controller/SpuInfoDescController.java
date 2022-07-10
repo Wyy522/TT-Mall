@@ -3,6 +3,9 @@ package com.market.mall.product.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.market.mall.product.entity.SpuInfoEntity;
+import com.market.mall.product.service.SpuInfoService;
+import com.market.mall.product.vo.SpuSaveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +37,7 @@ public class SpuInfoDescController {
      * 列表
      */
     @RequestMapping("/list")
+    //@RequiresPermissions("product:spuinfodesc:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = spuInfoDescService.queryPage(params);
 
@@ -45,8 +49,9 @@ public class SpuInfoDescController {
      * 信息
      */
     @RequestMapping("/info/{spuId}")
+    //@RequiresPermissions("product:spuinfodesc:info")
     public R info(@PathVariable("spuId") Long spuId){
-		SpuInfoDescEntity spuInfoDesc = spuInfoDescService.getById(spuId);
+        SpuInfoDescEntity spuInfoDesc = spuInfoDescService.getById(spuId);
 
         return R.ok().put("spuInfoDesc", spuInfoDesc);
     }
@@ -55,8 +60,9 @@ public class SpuInfoDescController {
      * 保存
      */
     @RequestMapping("/save")
+    //@RequiresPermissions("product:spuinfodesc:save")
     public R save(@RequestBody SpuInfoDescEntity spuInfoDesc){
-		spuInfoDescService.save(spuInfoDesc);
+        spuInfoDescService.save(spuInfoDesc);
 
         return R.ok();
     }
@@ -65,8 +71,9 @@ public class SpuInfoDescController {
      * 修改
      */
     @RequestMapping("/update")
+    //@RequiresPermissions("product:spuinfodesc:update")
     public R update(@RequestBody SpuInfoDescEntity spuInfoDesc){
-		spuInfoDescService.updateById(spuInfoDesc);
+        spuInfoDescService.updateById(spuInfoDesc);
 
         return R.ok();
     }
@@ -75,10 +82,10 @@ public class SpuInfoDescController {
      * 删除
      */
     @RequestMapping("/delete")
+    //@RequiresPermissions("product:spuinfodesc:delete")
     public R delete(@RequestBody Long[] spuIds){
-		spuInfoDescService.removeByIds(Arrays.asList(spuIds));
+        spuInfoDescService.removeByIds(Arrays.asList(spuIds));
 
         return R.ok();
     }
-
 }
