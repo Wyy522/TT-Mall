@@ -1,5 +1,7 @@
 package com.market.mall.product.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.market.mall.product.dao.CategoryDao;
 import com.market.mall.product.entity.CategoryEntity;
 import com.market.mall.product.service.CategoryBrandRelationService;
@@ -7,6 +9,8 @@ import com.market.mall.product.service.CategoryService;
 import com.market.mall.product.vo.Catelog2Vo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,11 +22,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.market.common.utils.PageUtils;
 import com.market.common.utils.Query;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
 
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     CategoryBrandRelationService categoryBrandRelationService;
@@ -106,9 +114,37 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return categoryEntities;
     }
 
+
+
+    public Map<String, List<Catelog2Vo>> getCatalogJson() {
+        //给缓存中放json字符串，拿出的json字符串，反序列为能用的对象
+        /**
+         * 1、空结果缓存：解决缓存穿透问题
+         * 2、设置过期时间(加随机值)：解决缓存雪崩
+         * 3、加锁：解决缓存击穿问题
+         */
+        //1、加入缓存逻辑,缓存中存的数据是json字符串
+        //JSON跨语言。跨平台兼容。
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+        String catalogJson = ops.get("catalogJson");
+        if (StringUtils.isEmpty(catalogJson)) {
+            System.out.println("缓存不命中...查询数据库...");
+            Map<String, List<Catelog2Vo>> catalogJsonFromDb =getCatalogJsonFromDb();
+            String s = JSON.toJSONString(catalogJsonFromDb);
+            stringRedisTemplate.opsForValue().set("catalogJson",s);
+            //2、缓存中没有数据，查询数据库
+//            Map<String, List<Catelog2Vo>> catalogJsonFromDb = getCatalogJsonFromDbWithRedissonLock();
+            return catalogJsonFromDb;
+        }
+        System.out.println("缓存命中...直接返回...");
+        //转为指定的对象
+        Map<String, List<Catelog2Vo>> result = JSON.parseObject(catalogJson,new TypeReference<Map<String, List<Catelog2Vo>>>(){});
+        return result;
+    }
+
    //@Cacheable(value = "category",key = "#root.methodName")
     @Override
-    public Map<String, List<Catelog2Vo>> getCatalogJson() {
+    public Map<String, List<Catelog2Vo>> getCatalogJsonFromDb() {
         System.out.println("查询了数据库");
 
         //将数据库的多次查询变为一次
