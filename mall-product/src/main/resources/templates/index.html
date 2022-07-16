@@ -22,7 +22,7 @@
       <img src="/static/index/img/top_find_logo.png" alt="">
       <div class="input_find">
         <input type="text" placeholder="卸妆水" />
-        <span style="background: url('/static/index/img/img_12.png') 0 -1px;"></span>
+        <span style="background: url(/static/index/img/img_12.png) 0 -1px;"></span>
         <a href="/static/#"><img src="/static/index/img/img_09.png" /></a>
       </div>
     </div>
@@ -113,7 +113,7 @@
     <div class="header_sous">
       <div class="header_form">
         <input id="searchText" type="text" placeholder="" />
-        <span style="background: url('/static/index/img/img_12.png') 0 -1px;"></span>
+        <span style="background: url(/static/index/img/img_12.png) 0 -1px;"></span>
         <!--<button><i class="glyphicon"></i></button>-->
         <a href="/static/#" ><img src="/static/index/img/img_09.png" onclick="search()" /></a>
       </div>
@@ -201,10 +201,11 @@
       <div class="header_banner">
         <div class="header_main_left">
           <ul>
-            <li th:each="category : ${categories}">
-              <a href="/static/#" class="header_main_left_a"   th:attr="ctg-data = ${category.catId}"><b th:text="${category.name}">家用电器</b></a>
+            <li th:each=" category:${categories} ">
+              <a class="header_main_left_a" href="#" th:attr="ctg-data=${category.catId}"><b
+                      th:text="${category.name}"></b></a>
             </li>
-          </ul>
+            </ul>
         </div>
         <div class="header_main_center">
           <div class="swiper-container swiper1">
