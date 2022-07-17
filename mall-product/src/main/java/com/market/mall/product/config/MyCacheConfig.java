@@ -1,4 +1,4 @@
-package com.xunqi.gulimall.product.config;
+package com.market.mall.product.config;
 
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

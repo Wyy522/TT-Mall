@@ -17,6 +17,8 @@ spring:
   redis:
     host: 192.168.56.10
     port: 6379
+  cache:
+    type: redis
 
 
 mybatis-plus:
@@ -31,4 +33,3 @@ server:
 logging:
   level:
     com.market.mall: debug
-
