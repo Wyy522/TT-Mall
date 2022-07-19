@@ -31,7 +31,6 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
-
 #        默认路由
         - id: admin_route
           uri: lb://renren-fast
@@ -39,3 +38,13 @@ spring:
             - Path=/api/**
           filters:  # 这段过滤器和验证码有关，api内容缓存了/renren-fast，还得注意/renren-fast也注册到nacos中
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+
+        - id: mall_host_route
+          uri: lb://mall-product
+          predicates:
+             - Host=mall.com
+
+        - id: mall_search_route
+          uri: lb://mall-search
+          predicates:
+             - Host=search.mall.com

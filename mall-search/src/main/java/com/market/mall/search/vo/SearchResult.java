@@ -7,15 +7,7 @@ import java.util.List;
 
 
 @Data
-public class
-
-
-
-
-
-
-
-SearchResult {
+public class SearchResult {
 
     /**
      * 查询到的所有商品信息
