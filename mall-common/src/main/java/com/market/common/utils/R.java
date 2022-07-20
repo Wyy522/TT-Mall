@@ -29,9 +29,9 @@ public class R extends HashMap<String, Object> {
 	}
 
 	public <T> T getData(String key,TypeReference<T> typeReference){
-		Object data=get(key);
-		String s = JSON.toJSONString(data);
-		T t = JSON.parseObject("s", typeReference);
+		Object data = get(key);	//默认是map
+		String jsonString = JSON.toJSONString(data);
+		T t = JSON.parseObject(jsonString, typeReference);
 		return t;
 
 	}
