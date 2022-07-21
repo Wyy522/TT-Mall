@@ -4,6 +4,8 @@ import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
+import com.market.mall.party.util.HttpUtils;
+import org.apache.http.HttpResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @SpringBootTest
 class MallThirdPartyApplicationTests {
@@ -65,5 +70,5 @@ class MallThirdPartyApplicationTests {
     @Test
     void contextLoads() {
     }
+    }
 
-}
