@@ -9,6 +9,7 @@ import com.market.mall.member.exception.UsernameException;
 import com.market.mall.member.feign.CouponFeignService;
 import com.market.mall.member.vo.MemberUserLoginVo;
 import com.market.mall.member.vo.MemberUserRegisterVo;
+import com.market.mall.member.vo.SocialUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +53,17 @@ public class MemberController {
         return R.ok();
     }
 
+    @PostMapping(value = "/oauth2/login")
+    public R oauthLogin(@RequestBody SocialUser socialUser) throws Exception {
+
+        MemberEntity memberEntity = memberService.login(socialUser);
+
+        if (memberEntity != null) {
+            return R.ok().setData(memberEntity);
+        } else {
+            return R.error(BizCodeEnume.LOGINACCT_PASSWORD_EXCEPTION.getCode(),BizCodeEnume.LOGINACCT_PASSWORD_EXCEPTION.getMsg());
+        }
+    }
 
     @PostMapping(value = "/login")
     public R login(@RequestBody MemberUserLoginVo vo) {

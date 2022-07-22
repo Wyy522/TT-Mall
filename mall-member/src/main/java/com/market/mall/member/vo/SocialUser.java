@@ -14,6 +14,6 @@ public class SocialUser {
 
     private String uid;
 
-    private String isRealName;
+    private long isRealName;
 
 }
