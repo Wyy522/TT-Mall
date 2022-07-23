@@ -2,9 +2,6 @@ package com.market.common.constant;
 
 /**
  * @Description:
- * @Created: with IntelliJ IDEA.
- * @author: 夏沫止水
- * @createTime: 2020-06-27 10:57
  **/
 public class AuthServerConstant {
 

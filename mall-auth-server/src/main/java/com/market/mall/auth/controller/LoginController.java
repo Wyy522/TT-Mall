@@ -4,6 +4,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.market.common.constant.AuthServerConstant;
 import com.market.common.exception.BizCodeEnume;
 import com.market.common.utils.R;
+import com.market.common.vo.MemberResponseVo;
 import com.market.mall.auth.feign.MemberFeignService;
 import com.market.mall.auth.feign.ThirdPartFeignService;
 import com.market.mall.auth.vo.UserLoginVo;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -145,7 +147,7 @@ public class LoginController {
         if (attribute == null) {
             return "login";
         } else {
-            return "redirect:http://gulimall.com";
+            return "redirect:http://mall.com";
         }
 
     }
@@ -158,8 +160,8 @@ public class LoginController {
         R login = memberFeignService.login(vo);
 
         if (login.getCode() == 0) {
-//            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {});
-//            session.setAttribute(LOGIN_USER,data);
+            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {});
+            session.setAttribute(LOGIN_USER,data);
             return "redirect:http://mall.com";
         } else {
             Map<String,String> errors = new HashMap<>();
@@ -169,12 +171,12 @@ public class LoginController {
         }
     }
 
-//
-//    @GetMapping(value = "/loguot.html")
-//    public String logout(HttpServletRequest request) {
-//        request.getSession().removeAttribute(LOGIN_USER);
-//        request.getSession().invalidate();
-//        return "redirect:http://gulimall.com";
-//    }
+
+    @GetMapping(value = "/loguot.html")
+    public String logout(HttpServletRequest request) {
+        request.getSession().removeAttribute(LOGIN_USER);
+        request.getSession().invalidate();
+        return "redirect:http://mall.com";
+    }
 
 }

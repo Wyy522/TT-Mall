@@ -6,7 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
+@EnableRedisHttpSession //redis整合session
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
