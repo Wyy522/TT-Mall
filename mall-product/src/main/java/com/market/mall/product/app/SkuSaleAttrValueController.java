@@ -1,14 +1,11 @@
 package com.market.mall.product.app;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.market.mall.product.entity.SkuSaleAttrValueEntity;
 import com.market.mall.product.service.SkuSaleAttrValueService;
@@ -17,18 +14,20 @@ import com.market.common.utils.R;
 
 
 
-/**
- * sku销售属性&值
- *
- * @author weiyiye
- * @email weiyiye@gmail.com
- * @date 2022-03-11 14:09:39
- */
+
 @RestController
 @RequestMapping("product/skusaleattrvalue")
 public class SkuSaleAttrValueController {
     @Autowired
     private SkuSaleAttrValueService skuSaleAttrValueService;
+
+
+
+    @GetMapping(value = "/stringList/{skuId}")
+    public List<String> getSkuSaleAttrValues(@PathVariable("skuId") Long skuId) {
+        List<String> stringList = skuSaleAttrValueService.getSkuSaleAttrValuesAsStringList(skuId);
+        return stringList;
+    }
 
     /**
      * 列表

@@ -7,5 +7,10 @@ spring:
     name: mall-search
   thymeleaf:
     cache: false
+  redis:
+    host: 192.168.56.10
+    port: 6379
+  cache:
+    type: redis
 server:
   port: 13001

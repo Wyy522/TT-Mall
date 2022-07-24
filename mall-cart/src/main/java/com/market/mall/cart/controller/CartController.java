@@ -51,10 +51,10 @@ public class CartController {
     @GetMapping(value = "/cart.html")
     public String cartListPage(Model model) throws ExecutionException, InterruptedException {
         //快速得到用户信息：id,user-key
-         UserInfoTo userInfoTo = CartInterceptor.toThreadLocal.get();
-        System.out.println(userInfoTo);
-//        CartVo cartVo = cartService.getCart();
-//        model.addAttribute("cart",cartVo);
+//        UserInfoTo userInfoTo = CartInterceptor.toThreadLocal.get();
+//        System.out.println(userInfoTo);
+        CartVo cartVo = cartService.getCart();
+        model.addAttribute("cart",cartVo);
         return "cartList";
     }
 
@@ -73,7 +73,7 @@ public class CartController {
         cartService.addToCart(skuId,num);
 
         attributes.addAttribute("skuId",skuId);
-        return "redirect:http://cart.gulimall.com/addToCartSuccessPage.html";
+        return "redirect:http://cart.mall.com/addToCartSuccessPage.html";
     }
 
 
@@ -105,7 +105,7 @@ public class CartController {
 
         cartService.checkItem(skuId,checked);
 
-        return "redirect:http://cart.gulimall.com/cart.html";
+        return "redirect:http://cart.mall.com/cart.html";
 
     }
 
@@ -122,7 +122,7 @@ public class CartController {
 
         cartService.changeItemCount(skuId,num);
 
-        return "redirect:http://cart.gulimall.com/cart.html";
+        return "redirect:http://cart.mall.com/cart.html";
     }
 
 
@@ -136,7 +136,7 @@ public class CartController {
 
         cartService.deleteIdCartInfo(skuId);
 
-        return "redirect:http://cart.gulimall.com/cart.html";
+        return "redirect:http://cart.mall.com/cart.html";
 
     }
 

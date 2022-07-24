@@ -4,10 +4,19 @@ spring:
     password: root
     url: jdbc:mysql://192.168.56.10:3306/mall-oms
     driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  application:
+    name: mall-order
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
 server:
-  port: 9000
+  port: 12002
+logging:
+  level:
+    com.market.mall: debug
