@@ -3,6 +3,9 @@ package com.market.mall.order;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+
 /**
  * 使用RabbitMQ
  * 1、引入amqp场景;RabbitAutoConfiguration就会自动生效
@@ -24,6 +27,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *      6、给分布式大事务的入口标注@GlobalTransactional
  *      7、每一个远程的小事务用@Trabsactional
  */
+@EnableFeignClients
+@EnableDiscoveryClient
 @EnableRabbit
 @SpringBootApplication
 public class MallOrderApplication {
