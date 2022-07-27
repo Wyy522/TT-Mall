@@ -6,10 +6,12 @@ import java.util.Map;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.market.common.exception.NoStockException;
 import com.market.common.utils.Query;
 import com.market.mall.ware.dao.WareSkuDao;
 import com.market.mall.ware.feign.ProductFeignService;
 import com.market.mall.ware.vo.SkuHasStockVo;
+import com.market.mall.ware.vo.WareSkuLockVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import com.market.mall.ware.service.WareSkuService;
 import com.market.common.utils.PageUtils;
 import com.market.common.utils.R;
 
+import static com.market.common.exception.BizCodeEnume.NO_STOCK_EXCEPTION;
 
 
 /**
@@ -33,6 +36,29 @@ import com.market.common.utils.R;
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
+
+    /**
+     * 锁定库存
+     * @param vo
+     *
+     * 库存解锁的场景
+     *      1）、下订单成功，订单过期没有支付被系统自动取消或者被用户手动取消，都要解锁库存
+     *      2）、下订单成功，库存锁定成功，接下来的业务调用失败，导致订单回滚。之前锁定的库存就要自动解锁
+     *      3）、
+     *
+     * @return
+     */
+    @PostMapping(value = "/lock/order")
+    public R orderLockStock(@RequestBody WareSkuLockVo vo) {
+
+        try {
+            boolean lockStock = wareSkuService.orderLockStock(vo);
+            return R.ok().setData(lockStock);
+        } catch (NoStockException e) {
+            return R.error(NO_STOCK_EXCEPTION.getCode(),NO_STOCK_EXCEPTION.getMsg());
+        }
+    }
+
 
     @PostMapping(value = "/hasStock")
     public R getSkuHasStock(@RequestBody List<Long> skuIds) {

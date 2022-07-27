@@ -12,7 +12,7 @@ import java.util.List;
 
 
 
-@FeignClient("gulimall-ware")
+@FeignClient("mall-ware")
 public interface WmsFeignService {
 
     /**

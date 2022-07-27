@@ -629,45 +629,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="box-attr-3">
-                    <div class="box-attr clear" th:each="attr : ${item.saleAttr}">
-                        <dl>
-                            <dt>选择[[${attr.attrName}]]</dt>
-                            <dd th:each="val : ${attr.attrValues}">
-                                <a th:attr=" class=${#lists.contains(#strings.listSplit(val.skuIds,','),item.info.skuId.toString())
-                                   ? 'sku_attr_value checked': 'sku_attr_value'}, skus=${val.skuIds} "
-                                >
-                                    [[${val.attrValue}]]
-                                    <!--											<img src="/static/item/img/59ddfcb1Nc3edb8f1.jpg" /> -->
-                                </a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <!--							<div class="box-attr-2 clear">-->
-                    <!--								<dl>-->
-                    <!--									<dt>选择版本</dt>-->
-                    <!--									<dd>-->
-                    <!--										<a href="/static/item/#">标准版</a>-->
-                    <!--									</dd>-->
-                    <!--									<dd>-->
-                    <!--										<a href="/static/item/#">套装版</a>-->
-                    <!--									</dd>-->
-                    <!--								</dl>-->
-                    <!--							</div>-->
-
-                    <!--							<div class="box-attr-2 clear">-->
-                    <!--								<dl>-->
-                    <!--									<dt>选择内存</dt>-->
-                    <!--									<dd>-->
-                    <!--										<a href="/static/item/#">64GB</a>-->
-                    <!--									</dd>-->
-                    <!--									<dd>-->
-                    <!--										<a href="/static/item/#">128GB</a>-->
-                    <!--									</dd>-->
-                    <!--								</dl>-->
-                    <!--							</div>-->
-                </div>
-
                 <div class="box-btns clear">
                     <div class="box-btns-one">
                         <input type="text" name="" id="productNum" value="1"/>
@@ -706,6 +667,22 @@
                         <img src="/static/item/img/e4ed3606843f664591ff1f68f7fda12d.png" alt=""/> 分享
                     </div>
                 </div>
+                <div class="box-attr-3">
+                    <div class="box-attr clear" th:each="attr : ${item.saleAttr}">
+                        <dl>
+                            <dt>选择[[${attr.attrName}]]</dt>
+                            <dd th:each="val : ${attr.attrValues}">
+                                <a th:attr=" class=${#lists.contains(#strings.listSplit(val.skuIds,','),item.info.skuId.toString())
+                                   ? 'sku_attr_value checked': 'sku_attr_value'}, skus=${val.skuIds} "
+                                >
+                                    [[${val.attrValue}]]
+                                    <!--											<img src="/static/item/img/59ddfcb1Nc3edb8f1.jpg" /> -->
+                                </a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
 
                 <div class="box-footer-zo">
                     <div class="box-footer clear">

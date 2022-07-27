@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.market.common.utils.PageUtils;
 import com.market.mall.order.entity.OrderEntity;
 import com.market.mall.order.vo.OrderConfirmVo;
+import com.market.mall.order.vo.OrderSubmitVo;
+import com.market.mall.order.vo.SubmitOrderResponseVo;
 
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -21,5 +23,6 @@ public interface OrderService extends IService<OrderEntity> {
 
     OrderConfirmVo confirmOrder() throws ExecutionException, InterruptedException;
 
+    SubmitOrderResponseVo submitOrder(OrderSubmitVo vo);
 }
 
