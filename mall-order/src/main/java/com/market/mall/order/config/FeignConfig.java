@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Configuration
-public class GuliFeignConfig {
+public class FeignConfig {
 
     @Bean("requestInterceptor")
     public RequestInterceptor requestInterceptor() {

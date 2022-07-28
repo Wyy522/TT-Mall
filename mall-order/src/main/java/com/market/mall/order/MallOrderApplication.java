@@ -1,10 +1,11 @@
 package com.market.mall.order;
-
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 /**
  * 使用RabbitMQ
@@ -27,6 +28,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *      6、给分布式大事务的入口标注@GlobalTransactional
  *      7、每一个远程的小事务用@Trabsactional
  */
+
+@EnableRedisHttpSession
+@EnableAspectJAutoProxy(exposeProxy = true)     //开启了aspect动态代理模式,对外暴露代理对象
 @EnableFeignClients
 @EnableDiscoveryClient
 @EnableRabbit
