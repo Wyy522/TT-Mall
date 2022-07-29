@@ -37,6 +37,21 @@ public class OrderController {
         OrderEntity orderEntity = orderService.getOrderByOrderSn(orderSn);
         return R.ok().setData(orderEntity);
     }
+
+    /**
+     * 分页查询当前登录用户的所有订单信息
+     * @param params
+     * @return
+     */
+    @PostMapping("/listWithItem")
+    //@RequiresPermissions("order:order:list")
+    public R listWithItem(@RequestBody Map<String, Object> params){
+        PageUtils page = orderService.queryPageWithItem(params);
+
+        return R.ok().put("page", page);
+    }
+
+
     /**
      * 列表
      */
