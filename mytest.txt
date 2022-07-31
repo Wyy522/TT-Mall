@@ -1,8 +1,1 @@
 this is a mall
-
-jmeter
-jconsol,jvisualvm
-
-order project
-
-sekill
