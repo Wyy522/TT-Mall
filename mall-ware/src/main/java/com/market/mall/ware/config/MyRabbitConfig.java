@@ -18,6 +18,7 @@ import java.util.HashMap;
 @Configuration
 public class MyRabbitConfig {
 
+
     private RabbitTemplate rabbitTemplate;
 
     @Bean
