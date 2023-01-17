@@ -39,6 +39,7 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
         return new PageUtils(page);
     }
 
+    //多字段模糊匹配
     @Override
     public PageUtils queryPage(Map<String, Object> params, Long catelogId) {
         String key = (String) params.get("key");
