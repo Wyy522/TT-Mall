@@ -1,0 +1,78 @@
+SearchRequest
+{
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "match": {
+                        "skuTitle": "keyword"
+                    }
+                }
+            ],
+            "filter": [
+                {
+                    "term": {
+                        "catalogId": "___"
+                    }
+                },
+                {
+                    "term": {
+                        "hasStock": "0/1"
+                    }
+                },
+                {
+                    "range": {
+                        "skuPrice": {
+                            "gte": ____,
+                            "lte": ____
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "sort": [{"Pricecount/timecount": {"order": "desc"}} ],
+    "from": _,
+    "size": _,
+    "highlight": {
+        "fields": {
+            "skuTitle": {
+
+            }
+        },
+        "pre_tags": "<b style='color:red'>",
+        "post_tags": "</b>"
+    },
+}
+
+
+mapping
+PUT /mall_product
+{
+  "mappings": {
+    "properties": {
+      "skuId": {
+        "type": "long"
+      },
+      "skuTitle": {
+        "type": "text",
+        "analyzer": "ik_smart"
+      },
+      "skuPrice": {
+        "type": "keyword"
+      },
+      "skuImg": {
+        "type": "keyword"
+      },
+      "saleCount": {
+        "type": "long"
+      },
+      "hasStock": {
+        "type": "boolean"
+      },
+      "catalogId": {
+        "type": "long"
+      },
+    }
+  }
+}

@@ -17,6 +17,7 @@ import java.io.IOException;
 @Slf4j
 @RabbitListener(queues = "stock.release.stock.queue")
 @Service
+
 public class StockReleaseListener {
 
     @Autowired
@@ -52,6 +53,7 @@ public class StockReleaseListener {
     @RabbitHandler
     public void handleOrderCloseRelease(OrderTo orderTo, Message message, Channel channel) throws IOException {
 
+        //6.
         log.info("******收到订单关闭，准备解锁库存的信息******");
 
         try {

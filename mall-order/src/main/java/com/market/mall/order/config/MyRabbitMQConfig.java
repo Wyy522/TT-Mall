@@ -88,6 +88,7 @@ public class MyRabbitMQConfig {
     @Bean
     public Binding orderReleaseBinding() {
 
+        //2.
         return new Binding("order.release.order.queue",
                 Binding.DestinationType.QUEUE,
                 "order-event-exchange",
